@@ -23,7 +23,7 @@ const Header = styled.div`
 const Main = styled.div`
   grid-area: main;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   background: #2f9292;
 `;
 

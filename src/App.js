@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+
 import imageCard1 from "./images/card1.png";
 import imageCard2 from "./images/card2.png";
 import imageCard3 from "./images/card3.png";
