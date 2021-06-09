@@ -1,24 +1,38 @@
 import React from "react";
-import { Container, Card, ImgBack } from "./Game.styles";
+import { Container, Button, GridCards, Card, ImgBack } from "./Game.styles";
 import backCard from "../../images/cover.png";
 
-const Game = ({ shuffledCards, cardImage, selectCard }) => {
+const Game = ({
+  disableImages,
+  onStartGame,
+  onChangeLevel,
+  shuffledCards,
+  cardImage,
+  onSelectedCard,
+}) => {
   return (
     <Container>
-      {shuffledCards.map((value, idx) => (
-        <Card key={idx} data-aos="flip-left">
-          {value.name}
-          {value.front ? (
-            <ImgBack src={cardImage(value.name)} alt="card" />
-          ) : (
-            <ImgBack
-              onClick={() => selectCard(idx)}
-              src={backCard}
-              alt="card"
-            />
-          )}
-        </Card>
-      ))}
+      <Button onClick={onStartGame}>Reset</Button>
+      <Button level={true} onClick={onChangeLevel}>
+        Change Level
+      </Button>
+      <GridCards>
+        {shuffledCards.map((value, idx) => (
+          <Card key={idx}>
+            {value.front ? (
+              <ImgBack src={cardImage(value.name)} alt="card" />
+            ) : (
+              <ImgBack
+                data-aos="flip-left"
+                disableImages={disableImages}
+                onClick={() => !disableImages && onSelectedCard(idx)}
+                src={backCard}
+                alt="card"
+              />
+            )}
+          </Card>
+        ))}
+      </GridCards>
     </Container>
   );
 };

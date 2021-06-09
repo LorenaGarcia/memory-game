@@ -16,33 +16,19 @@ import { Layout } from "./components/Layout";
 import { Game } from "./components/Game";
 import { Home } from "./components/Home";
 
-const cards = [
-  { solved: false, front: false, name: "card1" },
-  { solved: false, front: false, name: "card2" },
-  { solved: false, front: false, name: "card3" },
-  { solved: false, front: false, name: "card4" },
-  { solved: false, front: false, name: "card5" },
-  { solved: false, front: false, name: "card6" },
-  { solved: false, front: false, name: "card7" },
-  { solved: false, front: false, name: "card8" },
-  { solved: false, front: false, name: "card9" },
-];
+import { cards } from "./data/cards";
 
 function App() {
   const [play, setPlay] = useState(false);
+  const [disableImages, setDisableImages] = useState(false);
   const [difficulty, setDifficulty] = useState(0);
   const [shuffledCards, setShuffledCards] = useState([]);
   const [gameOver, setGameOver] = useState(false);
-  const [temporaryCards, setTemporaryCards] = useState([
-    { card1: null, card2: null },
-  ]);
-
-  console.log(cards.slice(0, difficulty));
+  const [selectedCards, setSelectedCards] = useState([]);
 
   useEffect(() => {
     AOS.init({
-      duration: 2000,
-      dataAosOffset: 400,
+      duration: 800,
     });
     window.addEventListener(
       "touchmove",
@@ -51,7 +37,39 @@ function App() {
       },
       false
     );
-  }, []);
+  }, [disableImages]);
+
+  useEffect(() => {
+    if (selectedCards.length === 2) {
+      let tempCards = [...shuffledCards];
+      const [firstCard, secondCard] = selectedCards;
+      if (shuffledCards[firstCard].name === shuffledCards[secondCard].name) {
+        tempCards[firstCard].solved = true;
+        tempCards[secondCard].solved = true;
+        setShuffledCards(tempCards);
+        setSelectedCards([]);
+      } else {
+        setDisableImages(true);
+        setTimeout(() => {
+          tempCards[firstCard].front = false;
+          tempCards[secondCard].front = false;
+          setShuffledCards(tempCards);
+          setSelectedCards([]);
+          setDisableImages(false);
+        }, 700);
+      }
+
+      setTimeout(() => {
+        setGameOver(
+          shuffledCards.find((element) => element.solved === false) ===
+            undefined
+            ? true
+            : false
+        );
+      }, 800);
+      setPlay(gameOver ? false : true);
+    }
+  }, [selectedCards]);
 
   function shufflingCards() {
     const cardByDifficulty = cards.slice(0, difficulty);
@@ -93,71 +111,42 @@ function App() {
     }
   };
 
-  const startGame = () => {
+  const onStartGame = () => {
     setPlay(true);
     setGameOver(false);
-    shufflingCards(difficulty);
+    setSelectedCards([]);
+    shufflingCards();
   };
 
-  const selectCard = (id) => {
+  const onSelectedCard = (idx) => {
     let tempCards = [...shuffledCards];
-    tempCards[id].front = true;
+    tempCards[idx].front = true;
     setShuffledCards(tempCards);
+    setSelectedCards((prevValue) => [...prevValue, idx]);
+  };
 
-    if (temporaryCards[0].card1) {
-      console.log("card2");
-      temporaryCards[0].card2 = id;
-      setTemporaryCards(temporaryCards);
-      if (
-        shuffledCards[temporaryCards[0].card1].name ===
-        shuffledCards[temporaryCards[0].card2].name
-      ) {
-        tempCards[temporaryCards[0].card1].solved = true;
-        tempCards[temporaryCards[0].card2].solved = true;
-        setShuffledCards(tempCards);
-        setTemporaryCards([{ card1: null, card2: null }]);
-        setTimeout(() => {
-          setGameOver(
-            shuffledCards.find((element) => element.solved === false) ===
-              undefined
-              ? true
-              : false
-          );
-        }, 700);
-        setPlay(gameOver ? false : true);
-        console.log("listo");
-      } else if (
-        shuffledCards[temporaryCards[0].card1].name !==
-        shuffledCards[temporaryCards[0].card2].name
-      ) {
-        setTimeout(() => {
-          tempCards[temporaryCards[0].card1].front = false;
-          tempCards[temporaryCards[0].card2].front = false;
-          setShuffledCards(tempCards);
-          setTemporaryCards([{ card1: null, card2: null }]);
-        }, 700);
-        console.log("listo");
-      }
-    } else if (!temporaryCards[0].card2) {
-      console.log("card1");
-      temporaryCards[0].card1 = id;
-      setTemporaryCards(temporaryCards);
-    }
+  const onChangeLevel = () => {
+    setPlay(false);
+    setGameOver(false);
+    setDifficulty(0);
   };
 
   return (
     <Layout>
       {play && !gameOver ? (
         <Game
+          disableImages={disableImages}
           shuffledCards={shuffledCards}
           cardImage={cardImage}
-          selectCard={selectCard}
+          onSelectedCard={onSelectedCard}
+          onStartGame={onStartGame}
+          onChangeLevel={onChangeLevel}
         />
       ) : (
         <Home
           difficulty={difficulty}
           gameOver={gameOver}
-          startGame={startGame}
+          onStartGame={onStartGame}
           setDifficulty={setDifficulty}
         />
       )}
