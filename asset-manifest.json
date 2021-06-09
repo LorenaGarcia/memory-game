@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/memory-game/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/memory-game/static/js/main.c9bd6122.chunk.js",
+    "main.js.map": "/memory-game/static/js/main.c9bd6122.chunk.js.map",
+    "runtime-main.js": "/memory-game/static/js/runtime-main.0b1dac65.js",
+    "runtime-main.js.map": "/memory-game/static/js/runtime-main.0b1dac65.js.map",
+    "static/css/2.7fc9bc2b.chunk.css": "/memory-game/static/css/2.7fc9bc2b.chunk.css",
+    "static/js/2.423d4b49.chunk.js": "/memory-game/static/js/2.423d4b49.chunk.js",
+    "static/js/2.423d4b49.chunk.js.map": "/memory-game/static/js/2.423d4b49.chunk.js.map",
+    "static/js/3.f7273e2c.chunk.js": "/memory-game/static/js/3.f7273e2c.chunk.js",
+    "static/js/3.f7273e2c.chunk.js.map": "/memory-game/static/js/3.f7273e2c.chunk.js.map",
+    "index.html": "/memory-game/index.html",
+    "static/css/2.7fc9bc2b.chunk.css.map": "/memory-game/static/css/2.7fc9bc2b.chunk.css.map",
+    "static/css/main.6dea0f05.chunk.css.map": "/memory-game/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.423d4b49.chunk.js.LICENSE.txt": "/memory-game/static/js/2.423d4b49.chunk.js.LICENSE.txt",
+    "static/media/card1.7f41aa3f.png": "/memory-game/static/media/card1.7f41aa3f.png",
+    "static/media/card2.5e0f346f.png": "/memory-game/static/media/card2.5e0f346f.png",
+    "static/media/card3.a70d2234.png": "/memory-game/static/media/card3.a70d2234.png",
+    "static/media/card4.8367a18c.png": "/memory-game/static/media/card4.8367a18c.png",
+    "static/media/card5.99e5ac71.png": "/memory-game/static/media/card5.99e5ac71.png",
+    "static/media/card6.9ee4608b.png": "/memory-game/static/media/card6.9ee4608b.png",
+    "static/media/card7.e6e26285.png": "/memory-game/static/media/card7.e6e26285.png",
+    "static/media/card8.6038fe4e.png": "/memory-game/static/media/card8.6038fe4e.png",
+    "static/media/card9.971f3140.png": "/memory-game/static/media/card9.971f3140.png",
+    "static/media/cover.8bc2d6bd.png": "/memory-game/static/media/cover.8bc2d6bd.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0b1dac65.js",
+    "static/css/2.7fc9bc2b.chunk.css",
+    "static/js/2.423d4b49.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.c9bd6122.chunk.js"
+  ]
+}
